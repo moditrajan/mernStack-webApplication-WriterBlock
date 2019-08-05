@@ -7,6 +7,53 @@ const Post = require("../../models/Post");
 const Profile = require("../../models/Profile");
 const User = require("../../models/User");
 
+var ObjectId = require("mongoose").Types.ObjectId;
+
+// @route   GET api/posts/user/:user
+// @desc    Get All Posts by userid
+// @access  Public
+router.get("/user/:user", async (req, res) => {
+  try {
+    const posts = await Post.find({
+      user: ObjectId(req.params.user)
+    });
+
+    //console.log(req.params.user);
+    //console.log(new ObjectId(req.params.id));
+    //5d38a617ad6da33181287379
+    if (!posts) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    res.json(posts);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
+// @route   GET api/posts/:id
+// @desc    Get Post by Id
+// @access  Public
+router.get("/:id", async (req, res) => {
+  try {
+    const post = await Post.findById(req.params.id);
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    console.log(req.params.id);
+    res.json(post);
+  } catch (err) {
+    console.error(err.message);
+    if (err.kind === "ObjectId") {
+      return res.status(404).json({ msg: "Post not found" });
+    }
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route   POST api/posts
 // @desc    Create a Post
 // @access  Private
@@ -58,25 +105,6 @@ router.get("/", async (req, res) => {
     res.json(posts);
   } catch (err) {
     console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
-
-// @route   GET api/posts/:id
-// @desc    Get Post by Id
-// @access  Public
-router.get("/:id", async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.id);
-    if (!post) {
-      return res.status(404).json({ msg: "Post not found" });
-    }
-    res.json(post);
-  } catch (err) {
-    console.error(err.message);
-    if (err.kind === "ObjectId") {
-      return res.status(404).json({ msg: "Post not found" });
-    }
     res.status(500).send("Server Error");
   }
 });
