@@ -50,14 +50,22 @@ const PostItem = ({
               Discussion
               {comments.length > 0 && <span>{comments.length}</span>}
             </Link>
-            {!auth.loading && user === auth.user._id && (
-              <button
-                type="button"
-                className="btn btn-danger"
-                onClick={e => deletePost(_id)}
-              >
-                <i className="fas fa-times" />
-              </button>
+            {console.log(auth)}
+            {auth.user === null ? (
+              <Fragment> {console.log("Its null")} </Fragment>
+            ) : (
+              <Fragment>
+                {console.log("auth aint null but the one i want is null")}
+                {!auth.loading && user === auth.user._id && (
+                  <button
+                    type="button"
+                    className="btn btn-danger"
+                    onClick={e => deletePost(_id)}
+                  >
+                    <i className="fas fa-times" />
+                  </button>
+                )}
+              </Fragment>
             )}
           </Fragment>
         )}

@@ -24,14 +24,21 @@ const CommentItem = ({
             Posted on <Moment format="YYYY/MM/DD">{date}</Moment>
           </small>
         </p>
-        {!auth.loading && user === auth.user._id && (
-          <button
-            onClick={e => deleteComment(postId, _id)}
-            type="button"
-            className="btn btn-danger"
-          >
-            <i className="fas fa-times" />
-          </button>
+
+        {auth.user === null ? (
+          <Fragment> </Fragment>
+        ) : (
+          <Fragment>
+            {!auth.loading && user === auth.user._id && (
+              <button
+                onClick={e => deleteComment(postId, _id)}
+                type="button"
+                className="btn btn-danger"
+              >
+                <i className="fas fa-times" />
+              </button>
+            )}
+          </Fragment>
         )}
       </div>
     </div>

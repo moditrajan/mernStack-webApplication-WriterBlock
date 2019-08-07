@@ -50,8 +50,8 @@ const App = () => {
                 component={CreateProfile}
               />
               <Route exact path="/edit-profile" component={EditProfile} />
-              <PrivateRoute exact path="/posts" component={Posts} />
-              <PrivateRoute exact path="/posts/:id" component={Post} />
+              <Route exact path="/posts" component={Posts} />
+              <Route exact path="/posts/:id" component={Post} />
             </Switch>
           </section>
         </Fragment>

@@ -8,7 +8,7 @@ import CommentForm from "./CommentForm";
 import CommentItem from "./CommentItem";
 import { getPost } from "../../actions/post";
 
-const Post = ({ getPost, post: { post, loading }, match }) => {
+const Post = ({ getPost, post: { post, loading }, match, auth }) => {
   useEffect(() => {
     getPost(match.params.id);
   }, [getPost, match.params.id]);
@@ -26,7 +26,12 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
         userName={true}
         postClass={"post-inProfile"}
       />
-      <CommentForm postId={post._id} />
+      {auth.isAuthenticated === false ? (
+        <p>Create an account or sig in to leave a comment</p>
+      ) : (
+        <CommentForm postId={post._id} />
+      )}
+
       <div className="bg-primary p">
         <h3>Comments</h3>
       </div>
@@ -42,11 +47,13 @@ const Post = ({ getPost, post: { post, loading }, match }) => {
 
 Post.propTypes = {
   getPost: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 });
 
 export default connect(

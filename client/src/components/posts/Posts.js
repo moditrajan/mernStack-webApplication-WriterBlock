@@ -6,7 +6,7 @@ import PostForm from "./PostForm";
 import { connect } from "react-redux";
 import { getPosts } from "../../actions/post";
 
-const Posts = ({ getPosts, post: { posts, loading } }) => {
+const Posts = ({ getPosts, post: { posts, loading }, auth }) => {
   useEffect(() => {
     getPosts();
   }, [getPosts]);
@@ -19,7 +19,8 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
         <i className="fas fa-user"> </i>
         Welcome to the community
       </p>
-      <PostForm />
+      {auth.isAuthenticated === true ? <PostForm /> : <Fragment />}
+
       <div className="posts">
         {posts.map(post => (
           <PostItem
@@ -36,11 +37,13 @@ const Posts = ({ getPosts, post: { posts, loading } }) => {
 
 Posts.propTypes = {
   getPosts: PropTypes.func.isRequired,
-  post: PropTypes.object.isRequired
+  post: PropTypes.object.isRequired,
+  auth: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  post: state.post
+  post: state.post,
+  auth: state.auth
 });
 
 export default connect(
