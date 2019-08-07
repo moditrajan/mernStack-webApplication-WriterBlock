@@ -77,7 +77,7 @@ export const createProfile = (
         "Content-Type": "application/json"
       }
     };
-    const res = await axios.post("/api/profile", formData, config);
+    await axios.post("/api/profile", formData, config);
 
     dispatch(setAlert(edit ? "Profile Updated" : "Profile Created"));
 
@@ -101,7 +101,7 @@ export const createProfile = (
 export const deleteAccount = () => async dispatch => {
   if (window.confirm("Are you sure? This can NOT be undone!")) {
     try {
-      const res = await axios.delete("/api/profile");
+      await axios.delete("/api/profile");
 
       dispatch({ type: CLEAR_PROFILE });
       dispatch({ type: ACCOUNT_DELETED });

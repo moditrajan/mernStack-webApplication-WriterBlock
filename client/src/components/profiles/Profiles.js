@@ -8,16 +8,16 @@ import { getProfiles } from "../../actions/profile";
 const Profiles = ({ getProfiles, profile: { profiles, loading } }) => {
   useEffect(() => {
     getProfiles();
-  }, []);
+  }, [getProfiles]);
   return (
     <Fragment>
       {loading ? (
         <Spinner />
       ) : (
         <Fragment>
-          <h1 class="large text-primary">Users</h1>
-          <p class="lead">
-            <i class="fas fa-book" /> Explore content created by other users
+          <h1 className="large text-primary">Users</h1>
+          <p className="lead">
+            <i className="fas fa-book" /> Explore content created by other users
           </p>
 
           <div className="profiles">

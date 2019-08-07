@@ -41,7 +41,8 @@ const EditProfile = ({
       instagram: loading || !profile.social ? "" : profile.social.instagram,
       facebook: loading || !profile.social ? "" : profile.social.facebook
     });
-  }, [loading]);
+    // eslint-disable-next-line
+  }, [loading, getCurrentProfile]);
 
   const {
     bio,

@@ -143,8 +143,15 @@
 .text-primary {
   color: #5adb70;
 }
+.text-dark {
+  color: #343a40;
+}
+
+.text-red {
+  color: #cf0834;
+}
 .round-img {
-  border-radius: 75%;
+  width: 50px;
 }
 .line {
   height: 1px;
@@ -406,6 +413,8 @@ img {
   display: flex;
   -ms-grid-columns: 1fr 4fr;
   grid-template-columns: 1fr 4fr;
+  justify-content: center;
+
   grid-gap: 1rem;
 }
 .profile-flex .profile-top {
@@ -529,4 +538,10 @@ img {
   .post button {
     padding: 0.3rem 0.4rem;
   }
+}
+
+.comment {
+  display: -ms-grid;
+  display: grid;
+  grid-gap: 2rem;
 }
