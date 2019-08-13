@@ -50,12 +50,11 @@ const PostItem = ({
               Discussion
               {comments.length > 0 && <span>{comments.length}</span>}
             </Link>
-            {console.log(auth)}
+
             {auth.user === null ? (
-              <Fragment> {console.log("Its null")} </Fragment>
+              <Fragment> </Fragment>
             ) : (
               <Fragment>
-                {console.log("auth aint null but the one i want is null")}
                 {!auth.loading && user === auth.user._id && (
                   <button
                     type="button"
